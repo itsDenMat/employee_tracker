@@ -2,86 +2,87 @@ const inquirer = require("inquirer");
 const mysql = require("mysql");
 
 var connection = mysql.createConnection({
-    host:"localhost",
-    port: 3001,
-    user: "root",
-    password: "",
-    database: "employee_tracker_db",
+  host: "localhost",
+  port: 3306,
+  user: "root",
+  password: "Caden#0207",
+  database: "employee_trackerDB"
 });
 
 function updateServer() {
-    connection.query("SELECT * from Departments", function(error, res) {
-        alldepartments = res.nap(dept => ({ name: dept.name, value: dept.id}));
-    });
+  connection.query("SELECT * from role", function(error, res) {
+    allroles = res.map(role => ({ name: role.title, value: role.id }));
+  });
 
-    connection.query("SELECT * from Employees", function(error, res) {
-        allemployees = res.map(employee => ({
-            name: `${Employees.first_name} ${Employees.last_name}`,
-            value: Employees.id
-        }));
-    });
+  connection.query("SELECT * from department", function(error, res) {
+    alldepartments = res.map(dept => ({ name: dept.name, value: dept.id }));
+  });
 
-    connection.query("SELECT * from Roles", function(error, res) {
-        allroles = res.map(role => ({ name: role.title, value: role.id}));
-    });
+  connection.query("SELECT * from employee", function(error, res) {
+    allemployees = res.map(employee => ({
+      name: `${employee.first_name} ${employee.last_name}`,
+      value: employee.id
+    }));
+  });
 }
 
 connection.connect(function(err) {
-    if (err) throw err;
-    console.log("");
-    startEmployeeManager();
-    updateServer();
+  if (err) throw err;
+  console.log("\nWelcome to the Employee Management System!\n");
+  startEmployeeManager();
+  updateServer();
 });
 
 function startEmployeeManager() {
-    inquirer
-        .prompt({
-            name: "action",
-            type: "list",
-            message: "Select the action you would like to do.",
-            choices: [
-                "View All Departments",
-                "View All Employees",
-                "View All Roles",
-                "Add a Department",
-                "Add an Employee",
-                "Add a Role",
-                "Update an Employee Role",
-                "Exit",
-            ]
-        })
-        .then(function (answer) {
-            switch(answer.action) {
-                case "View all Departments":
-                viewAllDepartments();
-                break;
+  inquirer
+    .prompt({
+      name: "action",
+      type: "list",
+      message: "What would you like to do?",
+      choices: [
+        "View All Employees",
+        "View All Departments",
+        "View All Roles",
+        "Add Employee",
+        "Add Department",
+        "Add Role",
+        "Update Employee Role",
+        "Exit"
+      ]
+    })
+    .then(function(answer) {
+      switch (answer.action) {
+        case "View All Employees":
+          viewAllEmployees();
+          break;
 
-                case "View all Employees":
-                viewAllEmployees();
-                break;
+        case "View All Departments":
+          viewAllDepartments();
+          break;
 
-                case "View all Roles":
-                viewallRoles();
-                break;
+        case "View All Roles":
+          viewAllRoles();
+          break;
 
-                case "Add a Department":
-                addDepartment();
-                break;
+        case "Add Employee":
+          addEmployee();
+          break;
 
-                case "Add an Employee":
-                addEmployee();
-                break;
+        case "Add Department":
+          addDepartment();
+          break;
 
-                case "Add a Role":
-                addRole();
-                break;
+        case "Add Role":
+          addRole();
+          break;
 
-                case "Update an Employee Role":
-                updateEmployeeRole();
-                break;
+        case "Update Employee Role":
+          updateEmployeeRole();
+          break;
 
-                case "Exit":
-                connection.end();
-            }
-        });
+        case "Exit":
+          connection.end();
+          break;
+      }
+    });
 }
