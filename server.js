@@ -1,7 +1,9 @@
+// Required dependencies
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const consoleTable = require("console.table");
 
+// Mysql connection to database
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
@@ -10,7 +12,7 @@ var connection = mysql.createConnection({
   database: "employee_tracker_db"
 });
 
-// update server
+// Function to update server
 function updateServer() {
   connection.query("SELECT * from role", function(error, res) {
     allroles = res.map(role => ({ name: role.title, value: role.id }));
@@ -28,6 +30,7 @@ function updateServer() {
   });
 }
 
+// Connects server and database
 connection.connect(function(err) {
   if (err) throw err;
   console.log("\nWelcome to the Employee Management System!\n");
@@ -35,6 +38,7 @@ connection.connect(function(err) {
   updateServer();
 });
 
+// Function to show prompt selections
 function startEmployeeManager() {
   inquirer
     .prompt({
@@ -53,6 +57,7 @@ function startEmployeeManager() {
       ]
     })
     .then(function(answer) {
+      // Switch statements for selections
       switch (answer.action) {
         case "View All Employees":
           viewAllEmployees();
@@ -89,8 +94,10 @@ function startEmployeeManager() {
     });
 }
 
+// Function to view list of employees
 function viewAllEmployees() {
   console.log("   ");
+  // Employee query
   var query =
     "SELECT employee.id, first_name AS firstname, last_name AS lastname, title AS role, name AS department, salary as salary FROM employee INNER JOIN role ON employee.role_id = role.id INNER JOIN department ON role.department_id = department.id;";
   connection.query(query, function(err, res) {
@@ -100,8 +107,10 @@ function viewAllEmployees() {
   });
 }
 
+// Function to view list of departments
 function viewAllDepartments() {
   console.log("   ");
+  // Department query
   var query = "SELECT id, name AS department FROM department";
   connection.query(query, function(err, res) {
     if (err) throw err;
@@ -110,8 +119,10 @@ function viewAllDepartments() {
   });
 }
 
+// Function to view list of roles
 function viewAllRoles() {
   console.log("   ");
+  // Roles query
   var query =
     "SELECT r.id, title AS role, salary, name AS department FROM role r LEFT JOIN department d ON department_id = d.id";
   connection.query(query, function(err, res) {
@@ -121,9 +132,11 @@ function viewAllRoles() {
   });
 }
 
+// Function to add new employee to employee list
 function addEmployee() {
   updateServer();
   inquirer
+  // Prompts users will have to satify to add a new employee
     .prompt([
       {
         type: "input",
@@ -158,9 +171,12 @@ function addEmployee() {
       );
     });
 }
+
+// Function to add a new department to department list
 function addDepartment() {
   updateServer();
   inquirer
+  // Prompts user will have to satify to add a new department
     .prompt([
       {
         type: "input",
@@ -183,9 +199,12 @@ function addDepartment() {
       );
     });
 }
+
+// Function to add a new role to role list
 function addRole() {
   updateServer();
   inquirer
+  // Prompts user will have to satisfy to add new role
     .prompt([
       {
         type: "input",
@@ -221,9 +240,12 @@ function addRole() {
       );
     });
 }
+
+// Function to update certain employee in employee list
 function updateEmployeeRole() {
   updateServer();
   inquirer
+  // Prompts user will have to satisfy to update employee
     .prompt([
       {
         name: "employee",
