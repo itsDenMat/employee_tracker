@@ -1,13 +1,15 @@
+USE employee_tracker_db;
+
 -- Departments table
-INSERT INTO Departments (name)
+INSERT INTO department (name)
 VALUES
 ("Engineering"),
 ("Finance"),
 ("Legal"),
-("Sales"),
+("Sales");
 
 -- Roles table
-INSERT INTO Roles (title, salary, dept_id)
+INSERT INTO role (title, salary, department_id)
 VALUES 
 ("Accountant", 60000, 2),
 ("Account Manager", 65000, 2),
@@ -19,7 +21,7 @@ VALUES
 ("Software Engineer", 123000, 1);
 
 -- Employees table
-INSERT INTO Employees (first_name, last_name, role_id)
+INSERT INTO employee (first_name, last_name, role_id)
 VALUES 
 ("Casey", "Roberts", 6),
 ("Christopher", "Sexton", 4),
@@ -31,6 +33,6 @@ VALUES
 ("Christopher", "Stewart", 1),
 ("April", "Meadows", 8),
 ("Victoria", "Holmes", 5),
-("Shelley", "Wright", 8),
+("Shelley", "Wright", 8);
 
 
