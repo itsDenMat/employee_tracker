@@ -1,14 +1,16 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
+// const consoleTable = require("console.table");
 
 var connection = mysql.createConnection({
   host: "localhost",
   port: 3306,
   user: "root",
   password: "Caden#0207",
-  database: "employee_trackerDB"
+  database: "employee_tracker_db"
 });
 
+// update server
 function updateServer() {
   connection.query("SELECT * from role", function(error, res) {
     allroles = res.map(role => ({ name: role.title, value: role.id }));
