@@ -33,12 +33,28 @@ Run `npm install` in order to have the following npm package dependencies instal
 
 ## Demo
 * View all employees
+<img src="./assets/view_emp.png">
+
 * View all departments
+<img src="./assets/view_dept.png">
+
 * View all roles
+<img src="./assets/view_role.png">
+
 * Add a new employee
+<img src="./assets/add_emp.gif">
+
 * Add a new department
+<img src="./assets/add_dept.gif">
+
 * Add a new role
+<img src="./assets/add_role.gif">
+
 * Update an employee role
-* Exit
+<img src="./assets/update_emp.gif">
+
+### Video Link to Full Demo
+
+[DEMO VIDEO LINK](https://drive.google.com/file/d/1Fmfc25_zxWHg6O3ghC2yc_BbBCyCiXas/view)
 
 
