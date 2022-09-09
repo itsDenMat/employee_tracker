@@ -21,18 +21,17 @@ VALUES
 ("Software Engineer", 123000, 1);
 
 -- Employees table
-INSERT INTO employee (first_name, last_name, role_id)
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES 
-("Casey", "Roberts", 6),
-("Christopher", "Sexton", 4),
-("Andrew", "Sanders", 2),
-("Nancy", "Carlson", 5),
-("Daniel", "Beard", 7),
-("Latoya", "Rollins", 7),
-("Charles", "Harper", 3),
-("Christopher", "Stewart", 1),
-("April", "Meadows", 8),
-("Victoria", "Holmes", 5),
-("Shelley", "Wright", 8);
+("Casey", "Roberts", 6, NULL),
+("Christopher", "Sexton", 4, NULL),
+("Andrew", "Sanders", 2, NULL),
+("Nancy", "Carlson", 5, NULL),
+("Daniel", "Beard", 7, 1),
+("Latoya", "Rollins", 7, 1),
+("Charles", "Harper", 3, 4),
+("Christopher", "Stewart", 1, 3),
+("April", "Meadows", 8, 2),
+("Shelley", "Wright", 8, 2);
 
 
